@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Shortening via Json</title>
+</head>
+<body>
+<h1>Request/response API</h1>
+<h2> Request header and payload
+<pre>
+POST /newurl HTTP/1.1
+Content-type: application/json
+  
+{ "url": "https://www.google.com" }
+</pre>
+  
+<h2> Response header and payload </h1>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{ "url": "https://www.google.com", "shortenUrl": "https://shortenurl.org/g20hi3k9t"}
+</pre>
+
+</body>
+</html>
