@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, jsonify
 import pickle, random, string
 import os.path
 
@@ -16,14 +16,11 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/favicon.ico')
-def favicon():
-    return redirect(url_for('static', filename='favicon.ico'))
-
-@app.route('/shortenurl', methods=['GET', 'POST'])
+@app.route('/newurl', methods=['GET', 'POST'])
 def shortenurl():
     if request.method == 'POST':
-      absolute = request.form['url']
+      reqjson = request.json
+      absolute = reqjon.get('url')
       shorten = randomstring(8)
       
       filename = "urlmap.pkl"
@@ -39,7 +36,10 @@ def shortenurl():
       pickle.dump(urlmapdict, urlmapfile)
       urlmapfile.close()
       
-      return render_template('result.html', variable=shorten)
+      return jsonify(
+        url=absolute,
+        shortenUrl=f"https://shortenurl.org/{shorten}"
+      )
     
 @app.route('/<shortpath>')
 def travel(shortpath):
