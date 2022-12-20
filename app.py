@@ -17,10 +17,10 @@ def home():
     return render_template('index.html')
 
 @app.route('/newurl', methods=['GET', 'POST'])
-def shortenurl():
+def newurl():
     if request.method == 'POST':
       reqjson = request.json
-      absolute = reqjon.get('url')
+      absolute = reqjson.get('url')
       shorten = randomstring(8)
       
       filename = "urlmap.pkl"
